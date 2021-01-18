@@ -1,13 +1,13 @@
-import praw
-import urllib.request
-import random
-from instabot import Bot
-from PIL import Image, ImageDraw, ImageFont
-import os
 import datetime
+import os
+import random
+import urllib.request
+
+import praw
+from PIL import Image, ImageDraw, ImageFont
+from instabot import Bot
 
 random_list = []
-
 
 try:
     os.remove('temp.jpg')
@@ -114,17 +114,17 @@ def insta_upload(title,page):
 
 
 while(True):
-    if(datetime.datetime.now().strftime("%X") == '23:46:30'):
+    if (datetime.datetime.now().strftime("%X") == '23:46:30'):
         try:
-            if(datetime.datetime.now().strftime("%X") == 'Wednesday'):
-                title , page = meme_installer(target=2)
-                insta_upload(title,page)
+            if (datetime.datetime.now().strftime("%X") == 'Wednesday'):
+                title, page = meme_installer(target=2)
+                insta_upload(title, page)
                 print('sunday fun')
             else:
                 title, page = meme_installer(target=1)
                 insta_upload(title, page)
                 print('normal meme upload on' + (datetime.datetime.now().strftime("%A")))
-        except :
+        except:
             continue
     else:
         print(datetime.datetime.now().strftime("%X"))
