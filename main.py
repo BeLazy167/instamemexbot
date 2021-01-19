@@ -2,7 +2,7 @@ import datetime
 import os
 import random
 import urllib.request
-
+import re
 import praw
 from PIL import Image, ImageDraw, ImageFont
 from instabot import Bot
@@ -58,6 +58,7 @@ def meme_installer(target):
                          user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
 
     meme_page = random_check()
+
     memes = reddit.subreddit(meme_page)
 
     if target == 1:
@@ -65,7 +66,9 @@ def meme_installer(target):
     elif target == 2:
         day_meme = memes.top('week')
     for meme in day_meme:
-        break
+        if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$" ,meme.url):
+            break
+        else : continue
     try:
         fullname = 'temp' + '.jpg'
         urllib.request.urlretrieve(meme.url, fullname)
@@ -112,20 +115,21 @@ def insta_upload(title,page):
     bot.login(username=username, password=password)
     bot.upload_photo(image,final_caption)
 
-
+def full_run():
+    try :
+        if (datetime.datetime.now( ).strftime( "%X" ) == 'Wednesday') :
+            title, page = meme_installer( target=2 )
+            insta_upload( title, page )
+            print( 'sunday fun' )
+        else :
+            title, page = meme_installer( target=1 )
+            insta_upload( title, page )
+            print( 'normal meme upload on' + (datetime.datetime.now( ).strftime( "%A" )) )
+    except :
+        full_run()
 while(True):
-    if (datetime.datetime.now().strftime("%X") == '23:46:30'):
-        try:
-            if (datetime.datetime.now().strftime("%X") == 'Wednesday'):
-                title, page = meme_installer(target=2)
-                insta_upload(title, page)
-                print('sunday fun')
-            else:
-                title, page = meme_installer(target=1)
-                insta_upload(title, page)
-                print('normal meme upload on' + (datetime.datetime.now().strftime("%A")))
-        except:
-            continue
+    if (datetime.datetime.now().strftime("%X") == '20:32:30'):
+        full_run()
     else:
         print(datetime.datetime.now().strftime("%X"))
     try:
