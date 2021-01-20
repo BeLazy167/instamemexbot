@@ -4,17 +4,10 @@ import random
 import urllib.request
 import re
 import praw
-from instabot import Bot
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from instabot import Bot
 
 random_list = []
-
-try:
-    os.remove('temp.jpg')
-    os.remove('watermark.jpg')
-    os.remove('watermark.jpg.REMOVE_ME')
-except:
-    None
 
 def random_check():
     page_list = ['funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
@@ -51,6 +44,7 @@ def random_check():
         else :
             #print('faied')
             return random_check()
+        
 def meme_installer(target):
     reddit = praw.Reddit(client_id="OZsROIAyH5bAbA", client_secret='PhYFLRgpllL3ZPpdIQe3D5yhRWc', username="DK00167",
                          password="98766789",
@@ -147,8 +141,9 @@ def full_run():
     except :
         full_run()
 while(True):
-    if (datetime.datetime.now().strftime("%X") == '20:32:30'):
-        full_run()
+    if (True or datetime.datetime.now().strftime("%X") == '21:57:00'):
+        for _ in range(2):
+            full_run()
     else:
         print(datetime.datetime.now().strftime("%X"))
     try:
