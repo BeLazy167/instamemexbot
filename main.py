@@ -4,8 +4,8 @@ import random
 import urllib.request
 import re
 import praw
-from PIL import Image, ImageDraw, ImageFont
 from instabot import Bot
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 random_list = []
 
