@@ -142,8 +142,7 @@ def full_run():
         full_run()
 while(True):
     if (True or datetime.datetime.now().strftime("%X") == '21:57:00'):
-        for _ in range(2):
-            full_run()
+        full_run()
     else:
         print(datetime.datetime.now().strftime("%X"))
     try:
