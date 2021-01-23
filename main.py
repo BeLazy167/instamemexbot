@@ -60,7 +60,7 @@ def meme_installer(target):
     for meme in day_meme:
         if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$" ,meme.url):
             break
-        else : continue
+        
     try:
         fullname = 'temp' + '.jpg'
         urllib.request.urlretrieve(meme.url, fullname)
