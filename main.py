@@ -77,7 +77,7 @@ def meme_installer(target) :
         meme_installer( )
 
 
-def add_border(border=50, color='white') :
+def add_border(border, color='white') :
     img = Image.open( 'temp.jpg' )
 
     if isinstance( border, int ) or isinstance( border, tuple ) :
@@ -121,7 +121,7 @@ def watermark() :
 
     # draw watermark in the bottom right corner
     draw.text( (x, y), text, fill=2, font=font )
-    im.show( )
+    im.show()
 
     # Save watermarked image
     im.save( 'watermark.jpg' )
