@@ -1,15 +1,15 @@
 import requests
-import random
 from rake_nltk import Rake
 import urllib.request as url
 from PIL import Image, ImageDraw, ImageFont, ImageOps,ImageFilter
-import main
 import textwrap
 from resizeimage import resizeimage
+import main
+
 
 ACCESS_KEY_UNSPLASH='j6-TI4_jxVWMUqgKc6K4zgHzFWChSZ6B-q6-cz3mk40'
+var1=0
 
-var1,var2=0,0
 def key_word():
     response = requests.get("https://uselessfacts.jsph.pl/random.json?language=en")
     fact = response.json()['text']
@@ -17,64 +17,65 @@ def key_word():
     r = Rake()
     r.extract_keywords_from_text(fact)
     key_word = r.get_ranked_phrases()
-    unsplash_img(key_word[0],fact)
+    print(key_word)
+    unsplash_img(fact,key_word[0])
 
-def add_border(border, color='white'):
-    img = Image.open( 'pixelreset.jpg' )
-    if isinstance( border, int ) or isinstance( border, tuple ) :
-        bimg = ImageOps.expand( img, border=border, fill=color )  # used to add border
-    else :
-        raise Exception( "Border is not an integer or tuple!" )
-    bimg.save( 'add_border.jpg' )
-    return
+def unsplash_img(fact,query="fact"):
+    print(query)
+    path='https://api.unsplash.com/search/photos?&client_id='+ACCESS_KEY_UNSPLASH+'&page=1&query='+query+'&orientation=landscape'
+    print(path)
+    response=requests.get(path)
+    img_data=response.json()
+    img_url = img_data['results'][0]['urls']['regular']
+    print(img_url)
+    img_name ='temp.jpg'
+    url.urlretrieve(img_url, img_name)
+    editor(fact)
 
+def editor(fact):
+    base = 583
+    img = Image.open('temp.jpg')
+    width, height = img.size
+    if width >= 583:
+        wpercent = (base/ float(img.size[0]))
+        hsize = int((float(img.size[1]) * float(wpercent)))
+        img = img.resize((base, hsize), Image.ANTIALIAS)
+        img.save('temp.jpg')
+    image_editor()
+    fact_watermark(fact)
 
 def image_editor():
-    im = Image.open('regular.jpg')  # open image
+    im = Image.open('temp.jpg')  # open image
     if im.size[0] >= im.size[1]:
         whitespace = int((im.size[0] - im.size[1]) / 2) + 0
         xbump = 0
     else:
         xbump = int((im.size[1] - im.size[0]) / 2) + 0
         whitespace = 0
-    var1, var2 = whitespace, xbump
-    print(var1,var2)
+    var1 = whitespace
     matted = ImageOps.expand(im, border=(xbump, whitespace),
                              fill='white')
-    matted.save("image_editor.jpg")
-    matted.show()
-    pixelreset()
+
+    # resize image to 583x583
+    im = resizeimage.resize_cover(matted, [583, 583])
+    im.save("temp.jpg")
+    add_border_and_blur(5, "white")
     return
 
-def pixelreset():
-    im=Image.open("image_editor.jpg")
-    im=resizeimage.resize_cover(im,[578,578])
-    im.save("pixelreset.jpg")
-    im.show()
-    add_border(10,"white")
+def add_border_and_blur(border, color='white'):
+    img = Image.open( 'temp.jpg' )
+    if isinstance( border, int ) or isinstance( border, tuple ) :
+        bimg = ImageOps.expand( img, border=border, fill=color )  # used to add border
+    else :
+        raise Exception( "Border is not an integer or tuple!" )
+
+    im2 = bimg.filter(ImageFilter.GaussianBlur(radius=3))
+    im2.save("temp.jpg")
     return
-
-def unsplash_img(query,fact):
-    orientation=random.choice(['landscape','portrait'])
-    path='https://api.unsplash.com/search/photos?&client_id='+ACCESS_KEY_UNSPLASH+'&page=1&query='+query
-    print(path)
-    response=requests.get(path)
-    img_data=response.json()
-    img_url = img_data['results'][0]['urls']['regular']
-    img_name ='regular.jpg'
-    url.urlretrieve(img_url, img_name)
-    editor(fact)
-
-def blur():
-    im1 = Image.open("add_border.jpg")
-    im2 = im1.filter(ImageFilter.GaussianBlur(radius=3))
-    im2.save("blur.jpg")
-    return "blur.jpg"
-
 
 def fact_watermark(fact) :
     # Create an Image Object from an Image
-    im = Image.open( 'blur.jpg' )
+    im = Image.open( 'temp.jpg' )
     img_width,img_height = im.size
 
     draw = ImageDraw.Draw( im )
@@ -90,37 +91,18 @@ def fact_watermark(fact) :
 
     # draw watermark in the top right corner
     draw.text( (x, y), text, fill=2, font=font )
-    im.show()
 
     # Draw in multiple line text
     draw_con = ImageDraw.Draw(im)
-    con_font = ImageFont.truetype('arial.ttf', 30)
-    textwidth, textheight = draw_con.textsize(fact, con_font, direction=None, language=None, stroke_width=30)
-    y_text = (img_height)/2-var1
-    lines = textwrap.wrap(fact, width=40)
-    for line in lines:
-        line_width, line_height = font.getsize(line)
-        print(line_width,line_height)
-        draw_con.multiline_text((30, y_text),
-                  line, font=con_font, fill=(0,0,0),align="center")
-        y_text += line_height+20
+    con_font = ImageFont.truetype('Font/Ts.ttf', 30)
+    lines = textwrap.wrap(fact, width=41)
+    new_fact='\n'.join(lines)
+    w,h=con_font.getsize(new_fact)
+    space=10
+    y_text = (img_height) / 2 - var1 - ((int((h+space))*len(lines)/ 2))
+    draw_con.multiline_text((41, y_text),new_fact, font=con_font, fill=(0,0,0),spacing=space,stroke_width=3,stroke_fill=(255,255,255))
     im.save("result.jpg")
     return "result.jpg"
 
-def editor(fact):
-    # code for editing image
-    base = 578
-    img = Image.open('regular.jpg')
-    width, height = img.size
-    if width >= 578:
-        wpercent = (base/ float(img.size[0]))
-        hsize = int((float(img.size[1]) * float(wpercent)))
-        img = img.resize((base, hsize), Image.ANTIALIAS)
-        img.save('regular.jpg')
-    image_editor()
-    blur()
-    fact_watermark(fact)
-    main.delete()
-
-
 key_word()
+main.delete()
