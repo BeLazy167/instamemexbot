@@ -7,8 +7,16 @@ import praw
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from instabot import Bot
 
-random_list = [ ]
 
+random_list = []
+random_list_full = []
+def file_to_list():
+    with open( "listofpages.txt", "r" ) as listofpages :
+        lines = listofpages.readlines()
+    random_list_full_without_n =  [ element.strip() for element in lines ]
+    print(random_list_full_without_n)
+    random_list = random_list_full_without_n[-6:]
+    return random_list
 def delete():
     try:
         os.remove( 'temp.jpg' )
@@ -16,14 +24,19 @@ def delete():
         os.remove( 'watermark.jpg.REMOVE_ME' )
     except:
         print('nothing deleted')
+
 def random_check() :
     page_list = [ 'funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
                   'SaimanSays/', 'wholesomememes' ]
     to_check = random.choice( page_list )
-    if len( random_list ) < 6 :
+    random_list = file_to_list( )
+    f = open( "listofpages.txt", "a" )
+    if len(random_list) < 6 :
         if len( random_list ) == 0 :
             random_list.append( to_check )
             print( random_list )
+            to_write = to_check + "\n"
+            f.write( to_write )
             return to_check
         else :
             for pages in random_list :
@@ -33,6 +46,8 @@ def random_check() :
                 else :
                     random_list.append( to_check )
                     print( random_list )
+                    to_write = to_check + "\n"
+                    f.write( to_write )
                     return to_check
     else :
         t = 0
@@ -47,10 +62,13 @@ def random_check() :
             random_list.pop( 0 )
             random_list.append( to_check )
             print( random_list )
+            to_write = to_check + "\n"
+            f.write( to_write )
             return to_check
         else :
             # print('faied')
             return random_check( )
+
 
 
 def meme_installer(target) :
