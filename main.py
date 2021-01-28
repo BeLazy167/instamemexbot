@@ -62,9 +62,9 @@ def meme_installer(target) :
     memes = reddit.subreddit( meme_page )
 
     if target == 1 :
-        day_meme = memes.top( 'day' )
-    elif target == 2 :
         day_meme = memes.top( 'week' )
+    elif target == 2 :
+        day_meme = memes.top( 'month' )
     for meme in day_meme :
         if re.search( "^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$", meme.url ) :
             break
@@ -128,7 +128,7 @@ def watermark() :
     return 'watermark.jpg'
 
 
-def insta_upload(title, page) :
+def insta_upload_meme(title, page) :
     username = 'memebot_10101'  # your username
     password = 'memebot@10101'  # your password
 
@@ -144,15 +144,14 @@ def full_run() :
     try :
         if (datetime.datetime.now( ).strftime( "%X" ) == 'Wednesday') :
             title, page = meme_installer( target=2 )
-            insta_upload( title, page )
+            insta_upload_meme( title, page )
             print( 'sunday fun' )
         else :
             title, page = meme_installer( target=1 )
-            insta_upload( title, page )
+            insta_upload_meme( title, page )
             print( 'normal meme upload on' + (datetime.datetime.now().strftime( "%A" )) )
     except :
         full_run()
 
-if __name__ == '__main__':
-    full_run()
-    delete()
+full_run()
+delete()
