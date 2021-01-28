@@ -4,11 +4,12 @@ import urllib.request as url
 from PIL import Image, ImageDraw, ImageFont, ImageOps,ImageFilter
 import textwrap
 from resizeimage import resizeimage
-import main
-
+from instabot import Bot
+import os
 
 ACCESS_KEY_UNSPLASH='j6-TI4_jxVWMUqgKc6K4zgHzFWChSZ6B-q6-cz3mk40'
 var1=0
+title=''
 
 def key_word():
     response = requests.get("https://uselessfacts.jsph.pl/random.json?language=en")
@@ -18,7 +19,9 @@ def key_word():
     r.extract_keywords_from_text(fact)
     key_word = r.get_ranked_phrases()
     print(key_word)
+    title=key_word[0]
     unsplash_img(fact,key_word[0])
+    return "temp.jpg",title
 
 def unsplash_img(fact,query="fact"):
     print(query)
@@ -33,10 +36,10 @@ def unsplash_img(fact,query="fact"):
     editor(fact)
 
 def editor(fact):
-    base = 583
+    base = 1070
     img = Image.open('temp.jpg')
     width, height = img.size
-    if width >= 583:
+    if width >= 1070:
         wpercent = (base/ float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
         img = img.resize((base, hsize), Image.ANTIALIAS)
@@ -56,8 +59,8 @@ def image_editor():
     matted = ImageOps.expand(im, border=(xbump, whitespace),
                              fill='white')
 
-    # resize image to 583x583
-    im = resizeimage.resize_cover(matted, [583, 583])
+    # resize image to 1070x1070
+    im = resizeimage.resize_cover(matted, [1070,1070])
     im.save("temp.jpg")
     add_border_and_blur(5, "white")
     return
@@ -79,9 +82,9 @@ def fact_watermark(fact) :
     img_width,img_height = im.size
 
     draw = ImageDraw.Draw( im )
-    text = "@memebot_10101"
+    text = "@factbot_10101"
 
-    font = ImageFont.truetype( 'arial.ttf', 10)
+    font = ImageFont.truetype( 'arial.ttf', 20)
     textwidth, textheight = draw.textsize( text, font, direction=None, language=None, stroke_width=13 )
 
     # calculate the x,y coordinates of the text
@@ -94,15 +97,35 @@ def fact_watermark(fact) :
 
     # Draw in multiple line text
     draw_con = ImageDraw.Draw(im)
-    con_font = ImageFont.truetype('Font/Ts.ttf', 30)
-    lines = textwrap.wrap(fact, width=41)
+    con_font = ImageFont.truetype('Font/Ts.ttf', 60)
+    lines = textwrap.wrap(fact, width=37)
     new_fact='\n'.join(lines)
     w,h=con_font.getsize(new_fact)
-    space=10
-    y_text = (img_height) / 2 - var1 - ((int((h+space))*len(lines)/ 2))
-    draw_con.multiline_text((41, y_text),new_fact, font=con_font, fill=(0,0,0),spacing=space,stroke_width=3,stroke_fill=(255,255,255))
-    im.save("result.jpg")
-    return "result.jpg"
+    space=20
+    y_text = (img_height) / 2 - var1 - ((int((h+space))*len(lines)/ 2)) + 30
+    draw_con.multiline_text((35, y_text),new_fact, font=con_font, fill=(0,0,0),spacing=space,stroke_width=3,stroke_fill=(255,255,255))
+    im.save("temp.jpg")
+    return "temp.jpg"
 
-key_word()
-main.delete()
+def delete():
+    try:
+        os.remove('temp.jpg')
+        os.remove('temp.jpg.REMOVE_ME.jpg')
+    except:
+        print("nothing is deleted")
+
+def insta_upload_fact():
+    print("Input your instagram username and password to upload fact")
+    username = 'factbot__'# your username
+    password = 'jay2345' # your password
+
+    image,title = key_word()  # here you can put the image directory
+    final_caption = title +' \n #fact #facts #knowledge #didyouknow #factz #factsdaily #amazingfacts #factsoflife #love #science #dailyfacts #knowledgeispower #india #gk #generalknowledge #instafacts #instagram #interestingfacts #funfacts #follow #truefacts #life #factoftheday #coolfacts #sciencefacts #motivation #truth #didyouknowfacts #quotes #bhfyp'
+
+    bot = Bot()
+    bot.login(username=username, password=password)
+    bot.upload_photo(image, final_caption)
+
+insta_upload_fact()
+delete()
+
