@@ -7,9 +7,9 @@ import praw
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from instabot import Bot
 
-
 random_list = []
 random_list_full = []
+
 def file_to_list():
     with open( "listofpages.txt", "r" ) as listofpages :
         lines = listofpages.readlines()
@@ -19,9 +19,11 @@ def file_to_list():
     return random_list
 def delete():
     try:
+        
+        os.remove( 'watermark.jpg.REMOVE_ME' )
         os.remove( 'temp.jpg' )
         os.remove( 'watermark.jpg' )
-        os.remove( 'watermark.jpg.REMOVE_ME' )
+        
     except:
         print('nothing deleted')
 
@@ -159,7 +161,6 @@ def insta_upload_meme(title, page) :
 
 
 def full_run() :
-    try :
         if (datetime.datetime.now( ).strftime( "%X" ) == 'Wednesday') :
             title, page = meme_installer( target=2 )
             insta_upload_meme( title, page )
@@ -168,8 +169,7 @@ def full_run() :
             title, page = meme_installer( target=1 )
             insta_upload_meme( title, page )
             print( 'normal meme upload on' + (datetime.datetime.now().strftime( "%A" )) )
-    except :
-        full_run()
+
 
 full_run()
 delete()
