@@ -176,7 +176,8 @@ def full_run() :
         title, page = meme_installer( target=1 )
         insta_upload_meme( title, page )
         print( 'normal meme upload on' + (datetime.datetime.now().strftime( "%A" )) )
+    delete()
 
 
 full_run()
-delete()
+
