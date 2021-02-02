@@ -119,6 +119,5 @@ def insta_upload_fact():
     bot.upload_photo(image, final_caption)
     delete()
 
-insta_upload_fact()
 
 
