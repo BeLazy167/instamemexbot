@@ -179,5 +179,5 @@ def full_run() :
     delete()
 
 
-full_run()
+
 
