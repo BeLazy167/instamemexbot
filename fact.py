@@ -6,7 +6,7 @@ import textwrap
 from resizeimage import resizeimage
 from instabot import Bot
 import os
-
+from os import environ
 
 ACCESS_KEY_UNSPLASH=environ['ACCESS_KEY_UNSPLASH']
 username_insta = environ['username_insta']
