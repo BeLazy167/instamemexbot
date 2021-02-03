@@ -7,6 +7,7 @@ import praw
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from instabot import Bot
 from resizeimage import resizeimage
+from os import environ
 
 client_id=environ['client_id']
 client_secret= environ['client_secret']
