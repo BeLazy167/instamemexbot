@@ -8,12 +8,12 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 from instabot import Bot
 from resizeimage import resizeimage
 
-client_id="OZsROIAyH5bAbA"
-client_secret='PhYFLRgpllL3ZPpdIQe3D5yhRWc'
-username="DK00167"
-password="98766789"
-username_insta = 'memebot_10101'
-password_insta = 'memebot@10101'
+client_id=environ['client_id']
+client_secret= environ['client_secret']
+username=environ['username']
+password=environ['password']
+username_insta = environ['username_insta']
+password_insta = environ['password_insta']
 
 random_list = []
 random_list_full = []
