@@ -8,21 +8,28 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 from instabot import Bot
 from resizeimage import resizeimage
 
+client_id="OZsROIAyH5bAbA"
+client_secret='PhYFLRgpllL3ZPpdIQe3D5yhRWc'
+username="DK00167"
+password="98766789"
+username_insta = 'memebot_10101'
+password_insta = 'memebot@10101'
+
 random_list = []
 random_list_full = []
+
 def file_to_list():
     with open( "listofpages.txt", "r" ) as listofpages :
         lines = listofpages.readlines()
     random_list_full_without_n =  [ element.strip() for element in lines ]
     random_list = random_list_full_without_n[-6:]
     return random_list
-def delete():
-    try:
-        os.remove('meme_watermark.jpg.REMOVE_ME')
-        os.remove( 'meme.jpg' )
-        os.remove( 'meme_watermark.jpg' )
-    except:
-        print('nothing deleted')
+
+def delete():  
+    os.remove('meme_watermark.jpg.REMOVE_ME')
+    os.remove( 'meme.jpg' )
+    os.remove( 'meme_watermark.jpg' )
+    
 
 def random_check(random_list) :
     page_list = [ 'funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
@@ -66,8 +73,8 @@ def random_check(random_list) :
             return random_check(random_list)
 
 def meme_installer(target) :
-    reddit = praw.Reddit( client_id="OZsROIAyH5bAbA", client_secret='PhYFLRgpllL3ZPpdIQe3D5yhRWc', username="DK00167",
-                          password="98766789",
+    reddit = praw.Reddit( client_id=client_id, client_secret=client_secret, username=username,
+                          password=password,
                           user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36" )
 
     meme_page = random_check(random_list)
@@ -156,14 +163,12 @@ def watermark() :
 
 
 def insta_upload_meme(title, page) :
-    username = 'memebot_10101'  # your username
-    password = 'memebot@10101'  # your password
 
     image = watermark( )  # here you can put the image directory
     final_caption = title + '\n r/' + page + '\n #memes #meme #dankmemes #funnymemes #memesdaily #edgymemes #dankmeme #offensivememes #dailymemes #fortnitememes #memestagram #spicymemes #funnymeme #memepage #memer #btsmemes #memelord #animememes #memez #tiktokmemes #memesespañol #memesespañol #nichememes #dankmemesdaily #edgymeme #memeaccount #kpopmemes #bestmemes #spongebobmemes #darkmemes'
 
     bot = Bot( )
-    bot.login( username=username, password=password,is_threaded=True)
+    bot.login( username=username_insta, password=password_insta,is_threaded=True)
     bot.upload_photo( image, final_caption )
 
 
@@ -177,7 +182,3 @@ def full_run() :
         insta_upload_meme( title, page )
         print( 'normal meme upload on' + (datetime.datetime.now().strftime( "%A" )) )
     delete()
-
-
-
-
