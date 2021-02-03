@@ -34,7 +34,7 @@ def delete():
 
 def random_check(random_list) :
     page_list = [ 'funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
-                  'SaimanSays/', 'wholesomememes' ]
+                  'SaimanSays/', 'wholesomememes' ,'IndianMeyMeys','indiameme','desimemes','Tinder','2meirl4meirl','ComedyCemetery','terriblefacebookmemes']
     to_check = random.choice( page_list )
     random_list = file_to_list()
     f = open( "listofpages.txt", "a" )
