@@ -18,5 +18,4 @@ urllib3==1.25.11
 more-itertools==8.6.0
 pipreqs==0.4.10
 nbformat==5.0.7
-kivy-deps.gstreamer==0.2.0
 Pillow==8.1.0
