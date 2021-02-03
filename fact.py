@@ -8,9 +8,9 @@ from instabot import Bot
 import os
 
 
-ACCESS_KEY_UNSPLASH='j6-TI4_jxVWMUqgKc6K4zgHzFWChSZ6B-q6-cz3mk40'
-username_insta = 'memebot_10101'
-password_insta = 'memebot_@10101'
+ACCESS_KEY_UNSPLASH=environ['ACCESS_KEY_UNSPLASH']
+username_insta = environ['username_insta']
+password_insta = environ['password_insta']
 var1=0
 
 def key_word():
