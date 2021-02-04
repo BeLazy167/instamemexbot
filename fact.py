@@ -120,4 +120,4 @@ def insta_upload_fact():
     delete()
 
 
-
+insta_upload_fact()
