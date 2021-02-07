@@ -77,9 +77,9 @@ def fact_watermark(fact) :
     img_width,img_height = im.size
 
     draw = ImageDraw.Draw( im )
-    text = "@factbot_10101"
+    text = "@memebit_10101"
 
-    font = ImageFont.truetype( 'arial.ttf', 20)
+    font = ImageFont.truetype( '/app/.fonts/Ts.ttf', 20)
     textwidth, textheight = draw.textsize( text, font, direction=None, language=None, stroke_width=13 )
 
     # calculate the x,y coordinates of the text
@@ -92,7 +92,7 @@ def fact_watermark(fact) :
 
     # Draw in multiple line text
     draw_con = ImageDraw.Draw(im)
-    con_font = ImageFont.truetype('Font/Ts.ttf', 60)
+    con_font = ImageFont.truetype('/app/.fonts/Ts.ttf', 60)
     lines = textwrap.wrap(fact, width=37)
     new_fact='\n'.join(lines)
     w,h=con_font.getsize(new_fact)
