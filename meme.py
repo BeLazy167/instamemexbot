@@ -183,3 +183,5 @@ def full_run() :
         insta_upload_meme( title, page )
         print( 'normal meme upload on' + (datetime.datetime.now().strftime( "%A" )) )
     delete()
+  
+full_run()
