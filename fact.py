@@ -77,7 +77,7 @@ def fact_watermark(fact) :
     img_width,img_height = im.size
 
     draw = ImageDraw.Draw( im )
-    text = "@memebit_10101"
+    text = "@_memebot_10101"
 
     font = ImageFont.truetype( '/app/.fonts/Ts.ttf', 20)
     textwidth, textheight = draw.textsize( text, font, direction=None, language=None, stroke_width=13 )
@@ -120,5 +120,3 @@ def insta_upload_fact():
     bot.upload_photo(image, final_caption)
     delete()
 
-
-insta_upload_fact()
