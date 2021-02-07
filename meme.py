@@ -184,4 +184,3 @@ def full_run() :
         print( 'normal meme upload on' + (datetime.datetime.now().strftime( "%A" )) )
     delete()
   
-full_run()
