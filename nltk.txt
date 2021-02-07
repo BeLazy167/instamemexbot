@@ -1,0 +1,2 @@
+stopword
+punkt
