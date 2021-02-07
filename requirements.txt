@@ -1,4 +1,4 @@
-nltk==3.5
+
 certifi==2020.6.20
 python-resize-image==1.1.19
 requests-toolbelt==0.7.0
