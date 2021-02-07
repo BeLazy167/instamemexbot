@@ -8,7 +8,7 @@
 **Instamemexbot** is bot which automatically post Memes and Facts on Instagram . The bot posts top Memes from Reddit pages. Bot also post amazing facts and photographs linked with a keyword from the facts.
 
 ### Go ahead and follow [@_memebot_10101](https://www.instagram.com/_memebot_10101) on Instagram for amazing Memes and Facts.
-<a href="https://www.instagram.com/_memebot_10101" target="blank"><img align="left" src="https://img.icons8.com/fluent/48/000000/instagram-new.png" alt="_memebot_10101"/></a>
+<a href="https://www.instagram.com/_memebot_10101" target="blank"><img align="left" src="https://img.icons8.com/fluent/48/000000/instagram-new.png" alt="_memebot_10101"/></a><br>
 
 ## How it works and what it does?
 ➡️ For Memes, It uses the PRAW – Python Reddit API Wrapper and fetches Memes Images from the different [Reddit](https://www.reddit.com/) Pages.
