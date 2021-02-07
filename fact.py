@@ -116,7 +116,7 @@ def insta_upload_fact():
 
     
     bot = Bot( )
-    bot.login( username=username_insta, password=password_insta,is_threaded=True)
+    bot.login( username=username_insta, password=password_insta)
     bot.upload_photo(image, final_caption)
     delete()
 
