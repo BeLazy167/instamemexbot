@@ -147,7 +147,7 @@ def watermark() :
     draw = ImageDraw.Draw( im )
     text = "@memebot_10101"
 
-    font = ImageFont.truetype( 'arial.ttf', 20 )
+    font = ImageFont.truetype( 'app/.fonts/Ts.ttf', 20 )
     textwidth, textheight = draw.textsize( text, font, direction=None, language=None, stroke_width=13 )
 
     # calculate the x,y coordinates of the text
@@ -166,7 +166,7 @@ def watermark() :
 def insta_upload_meme(title, page) :
 
     image = watermark( )  # here you can put the image directory
-    final_caption = title + '\n r/' + page + '\n #memes #meme #dankmemes #funnymemes #memesdaily #edgymemes #dankmeme #offensivememes #dailymemes #fortnitememes #memestagram #spicymemes #funnymeme #memepage #memer #btsmemes #memelord #animememes #memez #tiktokmemes #memesespañol #memesespañol #nichememes #dankmemesdaily #edgymeme #memeaccount #kpopmemes #bestmemes #spongebobmemes #darkmemes'
+    final_caption = title + '\n r/' + page + '.\n.\n.\n.\n.\n #memes #meme #dankmemes #funnymemes #memesdaily #edgymemes #dankmeme #offensivememes #dailymemes #fortnitememes #memestagram #spicymemes #funnymeme #memepage #memer #btsmemes #memelord #animememes #memez #tiktokmemes #memesespañol #memesespañol #nichememes #dankmemesdaily #edgymeme #memeaccount #kpopmemes #bestmemes #spongebobmemes #darkmemes'
 
     bot = Bot( )
     bot.login( username=username_insta, password=password_insta,is_threaded=True)
