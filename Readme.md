@@ -72,7 +72,7 @@ Always open for new features just create an issue. If want to add a new feature 
 ## If you liked our work considering giving it a 🌟.
 
 
-## Contributers
+### Contributers
 
 people who already contributed to Instamemexbot
 
