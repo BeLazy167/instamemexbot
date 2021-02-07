@@ -114,8 +114,9 @@ def insta_upload_fact():
     image,fact = key_word()  # here you can put the image directory
     final_caption = fact+' \n #fact #facts #knowledge #didyouknow #factz #factsdaily #amazingfacts #factsoflife #love #science #dailyfacts #knowledgeispower #india #gk #generalknowledge #instafacts #instagram #interestingfacts #funfacts #follow #truefacts #life #factoftheday #coolfacts #sciencefacts #motivation #truth #didyouknowfacts #quotes #bhfyp'
 
-    bot = Bot()
-    bot.login(username=username_insta, password=password_insta )
+    
+    bot = Bot( )
+    bot.login( username=username_insta, password=password_insta,is_threaded=True)
     bot.upload_photo(image, final_caption)
     delete()
 
