@@ -147,7 +147,7 @@ def watermark() :
     draw = ImageDraw.Draw( im )
     text = "@memebot_10101"
 
-    font = ImageFont.truetype( 'app/.fonts/Ts.ttf', 20 )
+    font = ImageFont.truetype( '/app/.fonts/Ts.ttf', 20 )
     textwidth, textheight = draw.textsize( text, font, direction=None, language=None, stroke_width=13 )
 
     # calculate the x,y coordinates of the text
