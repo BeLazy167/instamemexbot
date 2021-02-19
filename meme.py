@@ -26,6 +26,7 @@ try:
     setting = json.load(f)
     cl = Client(setting)
     cl.login(username_insta, password_insta)
+    print('login successful')
 except:
     print("login error")
 
