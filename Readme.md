@@ -78,5 +78,5 @@ people who already contributed to Instamemexbot
 
 <a href="https://github.com/BeLazy167/instamemexbot/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=BeLazy167/instamemexbot" />
-</a>
+</a><br>
 
