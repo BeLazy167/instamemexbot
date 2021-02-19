@@ -17,8 +17,10 @@ var1=0
 
 try:
     setting = environ['setting']
-    cl = Client(setting)
+    login_setting = json.loads(setting)
+    cl = Client(login_setting)
     cl.login(username_insta, password_insta)
+    print('login successful')
 except:
     print("login error")
 
