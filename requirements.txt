@@ -4,6 +4,7 @@ python-resize-image
 requests-toolbelt
 pickleshare
 prawcore
+json
 praw
 instabot
 requests
@@ -20,4 +21,5 @@ more-itertools
 pipreqs
 nbformat
 Pillow
+instagrapi
 rake-nltk
