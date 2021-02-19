@@ -4,7 +4,6 @@ python-resize-image
 requests-toolbelt
 pickleshare
 prawcore
-json
 praw
 instabot
 requests
