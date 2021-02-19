@@ -16,8 +16,7 @@ password_insta = environ['password_insta']
 var1=0
 
 try:
-    f = open('/app/data/_memebot_10101_uuid_and_cookie.json')
-    setting = json.load(f)
+    setting = environ['setting']
     cl = Client(setting)
     cl.login(username_insta, password_insta)
 except:
